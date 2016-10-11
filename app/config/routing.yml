@@ -5,7 +5,3 @@ emm_user:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-
-emm_curso:
-    resource: "@CursoMainBundle/Resources/config/routing.yml"
-    prefix:   /
