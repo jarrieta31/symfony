@@ -1,0 +1,52 @@
+curso_main_homepage:
+    path:     /hello/{nombre}
+    defaults: { _controller: CursoMainBundle:Default:index }
+
+curso_main_help:
+    path:     /ayuda/{tema}
+    defaults: { _controller: CursoMainBundle:Default:ayuda }
+    
+curso_main_nosotros:
+    path:     /nosotros/{nombre}/{apellido}
+    defaults: { _controller: CursoMainBundle:Info:nosotros, nombre:Julio, apellido:Arrieta}
+    
+curso_main_info:
+    path:     /info/{pagina}
+    defaults: { _controller: CursoMainBundle:Info:pagina_estatica, pagina:quien}
+    requirements:
+        pagina: quien|donde
+        
+        
+        
+       
+curso_main_addOneProd:
+    path:     /productos/addOne/{nombre}/{precio}
+    defaults: { _controller: CursoMainBundle:Product:addOne, nombre:anonimo, precio:10}
+    
+
+curso_main_allProd:
+    path:     /productos/all/
+    defaults: { _controller: CursoMainBundle:Product:getAll}
+    
+curso_main_oneProd:
+    path:     /productos/detalle/{id}
+    defaults: { _controller: CursoMainBundle:Product:getById}
+    
+curso_main_oneProdByNombre:
+    path:     /productos/detalleByNombre/{nombre}
+    defaults: { _controller: CursoMainBundle:Product:getByNombre}
+    
+curso_main_updateProd:
+    path:     /productos/update/{id}/{nombre}/{precio}
+    defaults: { _controller: CursoMainBundle:Product:update}
+    
+curso_main_borraProd:
+    path:     /productos/delete/{id}
+    defaults: { _controller: CursoMainBundle:Product:delete}
+
+
+curso_main_newProd:
+    path:     /productos/nuevoProducto
+    defaults: { _controller: CursoMainBundle:Product:nuevoProducto}
+
+    

@@ -1,0 +1,85 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Usuarios{% endblock %}
+{% block body %}
+	
+	{{ parent() }}
+	
+	{{ include('EMMUserBundle:User:messages/success.html.twig') }}
+	{{ include('EMMUserBundle:User:messages/danger.html.twig') }}
+
+<div class="container">
+	<div class="col-md-12">
+		<div class="page-header margin-none">
+			<h2>{% trans %}Users{% endtrans %}</h2>
+		</div>
+		<div class="table-responsive">
+			<h4>
+				<span class="label label-primary">
+				  	{% trans %}Total records:{% endtrans %} <span id="total" class="badge">{{ pagination.getTotalItemCount }}</span>
+				</span>
+			</h4>
+			<br>			 
+			<table class="table table-hover table-striped">
+				<thead>
+		 			<tr class="success" >
+						<th>{{ knp_pagination_sortable(pagination, 'Username'|trans,'u.username') }}</th>
+						<th>{{ knp_pagination_sortable(pagination, 'First name'|trans,'u.firstName') }}</th>
+						<th>{{ knp_pagination_sortable(pagination, 'Last name'|trans,'u.lastName') }}</th>
+						<th>{{ knp_pagination_sortable(pagination, 'Email'|trans,'u.email') }}</th>
+						<th>{{ knp_pagination_sortable(pagination, 'Role'|trans,'u.role') }}</th>
+						<th>{{ knp_pagination_sortable(pagination, 'Created'|trans,'u.createdAt') }}</th>
+						<th>{{ knp_pagination_sortable(pagination, 'Updated'|trans,'u.updatedAt') }}</th>
+						<th><a>{{ 'Actions'|trans }}</a></th>
+					</tr>
+				</thead>
+			
+				<tbody>
+					{% for user in pagination %}
+						<tr data-id="{{ user.id }}">
+							<td>{{ user.username }}</td>
+							<td>{{ user.firstName }}</td>
+							<td>{{ user.lastName }}</td>
+							<td>{{ user.email }}</td>
+							<td>
+								{% if user.role == 'ROLE_ADMIN' %}
+									<strong>Administrator</strong>
+								{% elseif user.role == 'ROLE_USER' %}
+									<strong>User</strong>
+								{% endif %}	
+							</td>
+							<td>{{ user.createdAt|date('d/m/Y H:i') }}</td>
+							<td>{{ user.updatedAt|date('d/m/Y H:i') }}</td>
+							<td class="actions">
+								<a href="{{ path('emm_user_view', {id:user.id}) }}" class="btn btn-sm btn-info">
+									{{ 'View'|trans }}
+								</a>
+								<a href="{{ path('emm_user_edit', {id:user.id}) }}" class="btn btn-sm btn-primary">
+									{{ 'Edit'|trans }}
+								</a>
+								<a href="{{ path('emm_user_delete', {id:user.id}) }}" class="btn btn-sm btn-danger btn-delete">
+									{{ 'Delete'|trans }}
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{# display navigation// plugin para la paginacion #}
+			<div class="navigation">
+				{{ knp_pagination_render(pagination) }}
+			</div>
+		</div>
+	</div>
+</div>
+{# Formulario para borrar usuarios #}
+	
+{{ include('EMMUserBundle:User:forms/form.html.twig', { form: delete_form_ajax, message: 'Are you sure ?'|trans, 
+	id: 'form-delete', with_submit: false}) }}
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/emmuser/js/delete-user.js') }}" ></script>
+{% endblock %}

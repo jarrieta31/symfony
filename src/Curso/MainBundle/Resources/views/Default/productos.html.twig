@@ -1,0 +1,30 @@
+{% extends '::layout.html.twig' %}
+
+    {% block cabecero_block %}
+        <img src="{{ asset('apple-touch-icon.png') }}" width="50px">
+    {% endblock %}
+        
+
+    {% block ciudades_block %}        
+        <h2>Ciudades:</h2>
+        <ul>
+            {% for ciudad in ciudades %}
+                <li>{{ ciudad.nombre }}</li>
+            {% endfor %}
+        </ul>
+    {% endblock %} 
+
+
+    {% block productos_block %}
+        <h2>Productos:</h2>
+        <ul>
+            {% for producto in productos %}
+                <li>
+                    <a href="{{ path('curso_main_oneProd', { "id": producto.id }) }}">{{ producto.nombre }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endblock %}
+
+
+    

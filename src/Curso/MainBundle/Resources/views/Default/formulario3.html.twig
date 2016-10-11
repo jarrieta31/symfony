@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{#
+        <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" />    
+	}
+     #}  
+    {% endblock %}
+
+{% block cabecero_block %}
+    <img src="{{ asset('apple-touch-icon.png') }}" width="50px">
+{% endblock %}
+
+{% block body %}
+
+	{{ form_start(form) }}
+		{# bloque que pinta errores globales del formulario #}
+
+			<div class="form_error">
+				{{ form_errors( form ) }}
+			</div>
+		
+		
+	
+{{ form_row }}
+	<div class="from_bloque">
+		<div class="form_error">
+			{{ form_errors( form.nombre ) }}
+		</div>
+		<div class="form_label">
+			{{ form_label(form.nombre) }}
+		</div>
+		<div class="form_input">
+			{{ form_widget(form.nombre) }}
+		</div>
+	</div>
+
+	
+		<div class="form_bloque">
+			<div class="form_error">
+				{{ form_errors(form.precio) }}
+			</div>
+			<div class="form_label">
+				{{ form_label(form.precio) }}
+			</div>
+			<div class="form_input">
+				{{ form_widget(form.precio) }}
+			</div>
+		</div>
+	
+		<div class="form_bloque">
+			<div class="btn btn-default">{{ form_widget(form.Guardar) }}</div>
+		</div>
+	
+	{{ form_end( form ) }}
+
+
+{% endblock %}

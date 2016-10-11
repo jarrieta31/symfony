@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" type="text/css" />    
+        
+    {% endblock %}
+
+{% block cabecero_block %}
+    <img src="{{ asset('apple-touch-icon.png') }}" width="50px">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	{{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
+		<div class="form-group">
+			{{ form_label(form.nombre, 'Nombre' , {'label_attr' : {'class' : 'control-label'} }) }}			
+			{{ form_widget(form.nombre, {'attr' : {'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+			<span class="text-danger">{{ form_errors(form.nombre) }}</span>
+		</div>
+		<div class="form-group">
+			{{ form_label(form.precio, 'Precio' , {'label_attr' : {'class' : 'control-label'}}) }}
+			{{ form_widget(form.precio, {'attr' : {'class': 'form-control', 'placeholder':'Precio'}}) }}
+			<span class="text-danger">{{ form_errors(form.precio) }}</span>
+		</div>
+		<div class="form-group">
+            {{ form_widget(form.Guardar, {'attr':{'class':'btn btn-primary'}}) }}
+        </div>
+
+	{{ form_end(form) }}
+</div>
+
+{% endblock %}
